@@ -1,0 +1,866 @@
+<html>
+  <head>
+    <title>Album</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link type="text/css" rel="stylesheet" href="main.css" />
+    <style>
+      a {
+        color: #8ff;
+      }
+
+      #menu {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+      }
+
+      .element {
+        width: 140px;
+        height: 180px;
+        box-shadow: 0px 0px 12px #034aa6;
+        cursor: pointer;
+        border-radius: 10px;
+      }
+
+      .element:hover {
+        box-shadow: 0px 0px 20px 7px #034aa6;
+      }
+
+      button {
+        color: rgba(127, 255, 255, 0.75);
+        background: #010d26;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-color: #010d26;
+      }
+
+      button:hover {
+        background-color: #0339a6;
+      }
+
+      button:active {
+        color: #000000;
+        background-color: rgba(0, 255, 255, 0.75);
+      }
+      img.image {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="tween.min.js"></script>
+
+    <div id="container"></div>
+    <div id="menu">
+      <button id="table" style="display: none">TABLE</button>
+      <button id="sphere">SPHERE</button>
+      <button id="helix">HELIX</button>
+      <button id="grid">GRID</button>
+    </div>
+
+    <audio autoplay="true" loop hidden>
+      <source src="./musics//Hom-Nay-Toi-Buon-Phung-Khanh-Linh.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- <embed
+      name="GoodEnough"
+      src="./musics//Hom-Nay-Toi-Buon-Phung-Khanh-Linh.mp3"
+      loop = "true"
+      hidden = "true"
+      autostart = "true"
+      volume = "50"
+    /> -->
+
+    <script type="module">
+      import * as THREE from "./three.module.js";
+
+      import { TrackballControls } from "./TrackballControls.js";
+      import { CSS3DRenderer, CSS3DObject } from "./CSS3DRenderer.js";
+
+      const img1 =
+        "./images/pro1.jpg";
+      const img2 =
+        "./images/pro2.jpg";
+      const img3 =
+        "./images/pro3.jpg";
+      const img4 =
+        "./images/pro4.jpg";
+      const img5 =
+        "./images/pro5.jpg";
+      const img6 =
+        "./images/pro6.jpg";
+      const img7 =
+        "./images/pro7.jpg";
+      const img8 =
+        "./images/pro8.jpg";
+      const img9 =
+        "./images/pro9.jpg";
+      const img10 =
+        "./images/pro10.jpg";
+      const img11 =
+        "./images/pro11.jpg";
+      // const img12 =
+      //   "./images/p12.jpg";
+      // const img13 =
+      //   "./images/p13.jpg";
+      // const img14 =
+      //   "./images/p14.png";
+      // const img15 =
+      //   "./images/p15.png";
+      // const img16 =
+      //   "./images/p16.jpg";
+      // const img17 =
+      //   "./images/p17.jpg";
+      // const img18 =
+      //   "./images/p18.jpg";
+      // const img19 =
+      //   "./images/p19.jpg";
+      // const img20 =
+      //   "./images/p20.jpg";
+      // const img21 =
+      //   "./images/p21.jpg";
+      // const img22 =
+      //   "./images/p22.jpg";
+      // const img23 =
+      //   "./images/p23.png";
+      // const img24 =
+      //   "./images/p24.png";
+      // const img25 =
+      //   "./images/p25.png";
+      // const img26 =
+      //   "./images/p26.jpg";
+      // const img27 =
+      //   "./images/p27.png";
+      // const img28 =
+      //   "./images/p28.jpg";
+      // const img29 =
+      //   "./images/p29.jpg";
+      // const img30 =
+      //   "./images/p30.png";
+      // const img31 =
+      //   "./images/p31.jpg";
+      // const img32 =
+      //   "./images/p32.jpg";
+      // const img33 =
+      //   "./images/p33.jpg";
+      // const img34 =
+      //   "./images/p34.png";
+      // const img35 =
+      //   "./images/p35.jpg";
+      // const img36 =
+      //   "./images/p36.jpg";
+      // const img37 =
+      //   "./images/p37.jpg";
+      // const img38 =
+      //   "./images/p38.jpg";
+      // const img39 =
+      //   "./images/p39.jpg";
+      // const img40 =
+      //   "./images/p40.jpg";
+      // const img41 =
+      //   "./images/p41.jpg";
+      // const img42 =
+      //   "./images/p42.jpg";
+      // const img43 =
+      //   "./images/p43.jpg";
+      // const img44 =
+      //   "./images/p44.jpg";
+      // const img45 =
+      //   "./images/p45.jpg";
+      // const img46 =
+      //   "./images/p46.jpg";
+      // const img47 =
+      //   "./images/p47.jpg";
+      // const img48 =
+      //   "./images/p48.jpg";
+      // const img49 =
+      //   "./images/p49.jpg";
+      // const img50 =
+      //   "./images/p50.jpg";
+      // const img51 =
+      //   "./images/p51.jpg";
+      // const img52 =
+      //   "./images/p52.jpg";
+      // const img53 =
+      //   "./images/p53.jpg";
+      // const img54 =
+      //   "./images/p54.jpg";
+      // const img55 =
+      //   "./images/p55.jpg";
+      // const img56 =
+      //   "./images/p56.jpg";
+      // const img57 =
+      //   "./images/p57.jpg";
+      // const img58 =
+      //   "./images/p58.jpg";
+      // const img59 =
+      //   "./images/p59.jpg";
+      // const img60 =
+      //   "./images/p60.jpg";
+      // const img61 =
+      //   "./images/p61.jpg";
+      // const img62 =
+      //   "./images/p62.jpg";
+      // const img63 =
+      //   "./images/p63.jpg";
+      // const img64 =
+      //   "./images/p64.jpg";
+      // const img65 =
+      //   "./images/p65.jpg";
+      // const img66 =
+      //   "./images/p66.jpg";
+      // const img67 =
+      //   "./images/p67.jpg";
+      // const img68 =
+      //   "./images/p68.jpg";
+      // const img69 =
+      //   "./images/p69.jpg";
+      // const img70 =
+      //   "./images/p70.jpg";
+      // const img71 =
+      //   "./images/p71.jpg";
+      // const img72 =
+      //   "./images/p72.jpg";
+      // const img73 =
+      //   "./images/p73.jpg";
+      // const img74 =
+      //   "./images/p74.jpg";
+      // const img75 =
+      //   "./images/p75.jpg";
+      // const img76 =
+      //   "./images/p76.jpg";
+      // const img77 =
+      //   "./images/p77.jpg";
+      // const img78 =
+      //   "./images/p78.jpg";
+      // const img79 =
+      //   "./images/p79.jpg";
+      // const img80 =
+      //   "./images/p80.jpg";
+      // const img81 =
+      //   "./images/p81.jpg";
+      // const img82 =
+      //   "./images/p82.jpg";
+      // const img83 =
+      //   "./images/p83.jpg";
+      // const img84 =
+      //   "./images/p84.jpg";
+      // const img85 =
+      //   "./images/p85.jpg";
+      // const img86 =
+      //   "./images/p86.jpg";
+      // const img87 =
+      //   "./images/p87.jpg";
+      // const img88 =
+      //   "./images/p88.jpg";
+      // const img89 =
+      //   "./images/p89.jpg";
+      // const img90 =
+      //   "./images/p90.jpg";
+      // const img91 =
+      //   "./images/p91.jpg";
+      // const img92 =
+      //   "./images/p92.jpg";
+      // const img93 =
+      //   "./images/p93.jpg";
+      // const img94 =
+      //   "./images/p94.jpg";
+      // const img95 =
+      //   "./images/p95.jpg";
+      // const img96 =
+      //   "./images/p96.jpg";
+      // const img97 =
+      //   "./images/p97.jpg";
+      // const img98 =
+      //   "./images/p98.jpg";
+      // const img99 =
+      //   "./images/p99.jpg";
+      // const img100 =
+      //   "./images/p100.jpg";
+      // const img101 =
+      //   "./images/p101.jpg";
+      // const img102 =
+      //   "./images/p102.jpg";
+      // const img103 =
+      //   "./images/p103.jpg";
+      // const img104 =
+      //   "./images/p104.jpg";
+      // const img105 =
+      //   "./images/p105.jpg";
+      // const img106 =
+      //   "./images/p106.jpg";
+      // const img107 =
+      //   "./images/p107.jpg";
+      // const img108 =
+      //   "./images/p108.jpg";
+      // const img109 =
+      //   "./images/p109.jpg";
+      // const img110 =
+      //   "./images/p110.jpg";
+
+      var table = [
+        img1,
+        "http://www.toyota.com.vn/",
+        1,
+        1,
+        img2,
+        "http://www.toyota.com.vn/",
+        18,
+        1,
+        img3,
+        "http://www.toyota.com.vn/",
+        1,
+        2,
+        img4,
+        "http://www.toyota.com.vn/",
+        2,
+        2,
+        img5,
+        "http://www.toyota.com.vn/",
+        13,
+        2,
+        img6,
+        "http://www.toyota.com.vn/",
+        14,
+        2,
+        img7,
+        "http://www.toyota.com.vn/",
+        15,
+        2,
+        img8,
+        "http://www.toyota.com.vn/",
+        16,
+        2,
+        img9,
+        "http://www.toyota.com.vn/",
+        17,
+        2,
+        img10,
+        "http://www.toyota.com.vn/",
+        18,
+        2,
+        img11,
+        "http://www.toyota.com.vn/",
+        1,
+        3,
+        img1,
+        "http://www.toyota.com.vn/",
+        2,
+        3,
+        img2,
+        "http://www.toyota.com.vn/",
+        13,
+        3,
+        img3,
+        "http://www.toyota.com.vn/",
+        14,
+        3,
+        img4,
+        "http://www.toyota.com.vn/",
+        15,
+        3,
+        img5,
+        "http://www.toyota.com.vn/",
+        16,
+        3,
+        img6,
+        "http://www.toyota.com.vn/",
+        17,
+        3,
+        img7,
+        "http://www.toyota.com.vn/",
+        18,
+        3,
+        img8,
+        "http://www.toyota.com.vn/",
+        1,
+        4,
+        img9,
+        "http://www.toyota.com.vn/",
+        2,
+        4,
+        img10,
+        "http://www.toyota.com.vn/",
+        3,
+        4,
+        img11,
+        "http://www.toyota.com.vn/",
+        4,
+        4,
+        img1,
+        "http://www.toyota.com.vn/",
+        5,
+        4,
+        img2,
+        "http://www.toyota.com.vn/",
+        6,
+        4,
+        img3,
+        "http://www.toyota.com.vn/",
+        7,
+        4,
+        img4,
+        "http://www.toyota.com.vn/",
+        8,
+        4,
+        img5,
+        "http://www.toyota.com.vn/",
+        9,
+        4,
+        img6,
+        "http://www.toyota.com.vn/",
+        10,
+        4,
+        img7,
+        "http://www.toyota.com.vn/",
+        11,
+        4,
+        img8,
+        "http://www.toyota.com.vn/",
+        12,
+        4,
+        img9,
+        "http://www.toyota.com.vn/",
+        13,
+        4,
+        img10,
+        "http://www.toyota.com.vn/",
+        14,
+        4,
+        img11,
+        "http://www.toyota.com.vn/",
+        15,
+        4,
+        img1,
+        "http://www.toyota.com.vn/",
+        16,
+        4,
+        img2,
+        "http://www.toyota.com.vn/",
+        17,
+        4,
+        img3,
+        "http://www.toyota.com.vn/",
+        18,
+        4,
+        img4,
+        "http://www.toyota.com.vn/",
+        1,
+        5,
+        img5,
+        "http://www.toyota.com.vn/",
+        2,
+        5,
+        img6,
+        "http://www.toyota.com.vn/",
+        3,
+        5,
+        img7,
+        "http://www.toyota.com.vn/",
+        4,
+        5,
+        img8,
+        "http://www.toyota.com.vn/",
+        5,
+        5,
+        img9,
+        "http://www.toyota.com.vn/",
+        6,
+        5,
+        img10,
+        "http://www.toyota.com.vn/",
+        7,
+        5,
+        img11,
+        "http://www.toyota.com.vn/",
+        8,
+        5,
+        img1,
+        "http://www.toyota.com.vn/",
+        9,
+        5,
+        img2,
+        "http://www.toyota.com.vn/",
+        10,
+        5,
+        img3,
+        "http://www.toyota.com.vn/",
+        11,
+        5,
+        img4,
+        "http://www.toyota.com.vn/",
+        12,
+        5,
+        img5,
+        "http://www.toyota.com.vn/",
+        13,
+        5,
+        img6,
+        "http://www.toyota.com.vn/",
+        14,
+        5,
+        img7,
+        "http://www.toyota.com.vn/",
+        15,
+        5,
+        img8,
+        "http://www.toyota.com.vn/",
+        16,
+        5,
+        img9,
+        "http://www.toyota.com.vn/",
+        17,
+        5,
+        img10,
+        "http://www.toyota.com.vn/",
+        18,
+        5,
+        img11,
+        "http://www.toyota.com.vn/",
+        1,
+        6,
+        img1,
+        "http://www.toyota.com.vn/",
+        2,
+        6,
+        img2,
+        "http://www.toyota.com.vn/",
+        4,
+        9,
+        img3,
+        "http://www.toyota.com.vn/",
+        5,
+        9,
+        img4,
+        "http://www.toyota.com.vn/",
+        6,
+        9,
+        img5,
+        "http://www.toyota.com.vn/",
+        7,
+        9,
+        img6,
+        "http://www.toyota.com.vn/",
+        8,
+        9,
+        img7,
+        "http://www.toyota.com.vn/",
+        9,
+        9,
+        img8,
+        "http://www.toyota.com.vn/",
+        10,
+        9,
+        img9,
+        "http://www.toyota.com.vn/",
+        11,
+        9,
+        img10,
+        "http://www.toyota.com.vn/",
+        12,
+        9,
+        img11,
+        "http://www.toyota.com.vn/",
+        13,
+        9,
+        img1,
+        "http://www.toyota.com.vn/",
+        14,
+        9,
+        img2,
+        "http://www.toyota.com.vn/",
+        15,
+        9,
+        img3,
+        "http://www.toyota.com.vn/",
+        16,
+        9,
+        img4,
+        "http://www.toyota.com.vn/",
+        17,
+        9,
+        img5,
+        "http://www.toyota.com.vn/",
+        18,
+        9,
+        img6,
+        "http://www.toyota.com.vn/",
+        4,
+        6,
+        img7,
+        "http://www.toyota.com.vn/",
+        5,
+        6,
+        img8,
+        "http://www.toyota.com.vn/",
+        6,
+        6,
+        img9,
+        "http://www.toyota.com.vn/",
+        7,
+        6,
+        img10,
+        "http://www.toyota.com.vn/",
+        8,
+        6,
+        img11,
+        "http://www.toyota.com.vn/",
+        9,
+        6,
+        img1,
+        "http://www.toyota.com.vn/",
+        10,
+        6,
+        img2,
+        "http://www.toyota.com.vn/",
+        11,
+        6,
+        img3,
+        "http://www.toyota.com.vn/",
+        12,
+        6,
+        img4,
+        "http://www.toyota.com.vn/",
+        13,
+        6,
+        img5,
+        "http://www.toyota.com.vn/",
+        14,
+        6,
+        img6,
+        "http://www.toyota.com.vn/",
+        15,
+        6
+      ];
+
+      var camera, scene, renderer;
+      var controls;
+
+      var objects = [];
+      var targets = { table: [], sphere: [], helix: [], grid: [] };
+
+      init();
+      animate();
+
+      function init() {
+        camera = new THREE.PerspectiveCamera(
+          40,
+          window.innerWidth / window.innerHeight,
+          1,
+          10000
+        );
+        camera.position.z = 2500;
+
+        scene = new THREE.Scene();
+
+        // table
+
+        for (var i = 0; i < table.length; i += 4) {
+          var element = document.createElement("a");
+          element.className = "element";
+          element.href = table[i+1];
+          element.target = "_blank";
+
+          var image = document.createElement("img");
+          image.src = table[i];
+          image.className = "image";
+          element.appendChild(image);
+
+          var object = new CSS3DObject(element);
+          object.position.x = Math.random() * 4000 - 2000;
+          object.position.y = Math.random() * 4000 - 2000;
+          object.position.z = Math.random() * 4000 - 2000;
+          scene.add(object);
+
+          objects.push(object);
+
+          //
+
+          var object = new THREE.Object3D();
+          object.position.x = table[i + 2] * 140 - 1330;
+          object.position.y = -(table[i + 3] * 180) + 990;
+
+          targets.table.push(object);
+        }
+
+        // sphere
+
+        var vector = new THREE.Vector3();
+
+        for (var i = 0, l = objects.length; i < l; i++) {
+          var phi = Math.acos(-1 + (2 * i) / l);
+          var theta = Math.sqrt(l * Math.PI) * phi;
+
+          var object = new THREE.Object3D();
+
+          object.position.setFromSphericalCoords(800, phi, theta);
+
+          vector.copy(object.position).multiplyScalar(2);
+
+          object.lookAt(vector);
+
+          targets.sphere.push(object);
+        }
+
+        // helix
+
+        var vector = new THREE.Vector3();
+
+        for (var i = 0, l = objects.length; i < l; i++) {
+          var theta = i * 0.175 + Math.PI;
+          var y = -(i * 8) + 450;
+
+          var object = new THREE.Object3D();
+
+          object.position.setFromCylindricalCoords(900, theta, y);
+
+          vector.x = object.position.x * 2;
+          vector.y = object.position.y;
+          vector.z = object.position.z * 2;
+
+          object.lookAt(vector);
+
+          targets.helix.push(object);
+        }
+
+        // grid
+
+        for (var i = 0; i < objects.length; i++) {
+          var object = new THREE.Object3D();
+
+          object.position.x = (i % 5) * 400 - 800;
+          object.position.y = -(Math.floor(i / 5) % 5) * 400 + 800;
+          object.position.z = Math.floor(i / 25) * 1000 - 2000;
+
+          targets.grid.push(object);
+        }
+
+        //
+
+        renderer = new CSS3DRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("container").appendChild(renderer.domElement);
+
+        //
+
+        controls = new TrackballControls(camera, renderer.domElement);
+        controls.minDistance = 500;
+        controls.maxDistance = 6000;
+        controls.addEventListener("change", render);
+
+        var button = document.getElementById("table");
+        button.addEventListener(
+          "click",
+          function() {
+            transform(targets.table, 2000);
+          },
+          false
+        );
+
+        var button = document.getElementById("sphere");
+        button.addEventListener(
+          "click",
+          function() {
+            transform(targets.sphere, 2000);
+          },
+          false
+        );
+
+        var button = document.getElementById("helix");
+        button.addEventListener(
+          "click",
+          function() {
+            transform(targets.helix, 2000);
+          },
+          false
+        );
+
+        var button = document.getElementById("grid");
+        button.addEventListener(
+          "click",
+          function() {
+            transform(targets.grid, 2000);
+          },
+          false
+        );
+
+        transform(targets.sphere, 2000);
+
+        //
+
+        window.addEventListener("resize", onWindowResize, false);
+      }
+
+      function transform(targets, duration) {
+        TWEEN.removeAll();
+
+        for (var i = 0; i < objects.length; i++) {
+          var object = objects[i];
+          var target = targets[i];
+
+          new TWEEN.Tween(object.position)
+            .to(
+              {
+                x: target.position.x,
+                y: target.position.y,
+                z: target.position.z
+              },
+              Math.random() * duration + duration
+            )
+            .easing(TWEEN.Easing.Exponential.InOut)
+            .start();
+
+          new TWEEN.Tween(object.rotation)
+            .to(
+              {
+                x: target.rotation.x,
+                y: target.rotation.y,
+                z: target.rotation.z
+              },
+              Math.random() * duration + duration
+            )
+            .easing(TWEEN.Easing.Exponential.InOut)
+            .start();
+        }
+
+        new TWEEN.Tween(this)
+          .to({}, duration * 2)
+          .onUpdate(render)
+          .start();
+      }
+
+      function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        render();
+      }
+
+      function animate() {
+        scene.rotation.y += 0.004;
+
+        requestAnimationFrame(animate);
+
+        TWEEN.update();
+
+        controls.update();
+
+        render();
+      }
+
+      function render() {
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
+</html>
